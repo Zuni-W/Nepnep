@@ -1,0 +1,40 @@
+	.pos 0
+	irmovq stack ,%rsp
+	call main
+	halt
+
+#data
+	.align 8
+	e1:
+	.quad 0x000a
+	.quad e2
+	e2:
+	.quad 0x00b0
+	.quad e3
+	e3:
+	.quad 0x0c00
+	.quad e4
+	e4:
+	.quad 0xd000
+	.quad 0
+
+main:
+	irmovq e1,%rdi
+	call rsum
+	ret
+
+rsum:
+	pushq %r12
+	irmovq $0,%rax
+	andq %rdi,%rdi
+	je re
+	mrmovq 0(%rdi),%r12
+	mrmovq 8(%rdi),%rdi
+	call rsum
+	addq %r12,%rax
+re:
+	popq %r12
+	ret
+
+.pos 0x200
+stack:
