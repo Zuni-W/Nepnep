@@ -8,3 +8,5 @@ Crypto: https://zuni-w.github.io/blog/posts/2021/04/03/Nep-Crypto-1.html
 RE/Pwn:
 
 Crypto: https://zuni-w.github.io/blog/posts/2021/04/10/Nep-crypto-2.html
+## shell lab
+https://zuni-w.github.io/2021/05/06/csapp-shlab-WP/
