@@ -1,0 +1,49 @@
+from struct import pack,unpack
+import zlib
+import gmpy
+def my_parse_number(number):
+    string = "%x" % number
+    #if len(string) != 64:
+    #    return ""
+    erg = []
+    while string != '':
+        erg = erg + [chr(int(string[:2], 16))]
+        string = string[2:]
+    return ''.join(erg)
+def extended_gcd(a, b):
+    x,y = 0, 1
+    lastx, lasty = 1, 0
+    while b:
+        a, (q, b) = b, divmod(a,b)
+        x, lastx = lastx-q*x, x
+        y, lasty = lasty-q*y, y
+    return (lastx, lasty, a)
+def chinese_remainder_theorem(items):
+  N = 1
+  for a, n in items:
+    N *= n
+  result = 0
+  for a, n in items:
+    m = N/n
+    r, s, d = extended_gcd(n, m)
+    if d != 1:
+      N=N/n
+      continue
+      #raise "Input not pairwise co-prime"
+    result += a*s*m
+  return result % N, N
+sessions=[{"c": 4326464079290513994330345331858646957797379573585868363694156071352331101545286600170021675927794957605432919571319829206949280669932421415556386468456171, "e": 3, "n": 10605117455957970230872340040104848382835046842337670426787553790026181223605043023659861186008188173439060220158628088607721666881055361354432895766095449},
+{"c": 1832807255587748024084782419224577430815824334681038441959810526286306927836882187523823466020686477018260568111465289019246499874730433337739210639649426, "e": 3, "n": 5566289660219138883220527709710474398714877828225034780637682760755861645060635414051330834118575610009388432068064088227788631458049349248431603149886511},
+{"c": 5358056588045553126434466242426442235633269410751610962122814765980214421992219634370323568786267033059372577726627663397275568304014672657411363726548140, "e": 3, "n": 6950320563219689227120034390267334098081713254503587385043293986758063701052533157736419678555763742611875955251200562764065010016963893886641033523434569}]
+
+data = []
+for session in sessions:
+    e=session['e']
+    n=session['n']
+    msg=session['c']
+    data = data + [(msg, n)]
+print "Please wait, performing CRT"
+x, n = chinese_remainder_theorem(data)
+e=session['e']
+realnum = gmpy.mpz(x).root(e)[0].digits()
+print my_parse_number(int(realnum))
