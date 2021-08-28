@@ -1,4 +1,8 @@
 ciphertexts=[
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> d24b9685f7073b95f7eb864e3203f42a3bbf20cf
 '280316470206017f5f163a3460100b111b2c254e103715600f13',
 '091b0f471d05153811122c70340c0111053a394e0b39500f0a18',
 '4638080a1e49243e55531a3e23161d411a362e4044111f374409',
@@ -14,6 +18,26 @@ ciphertexts=[
 ]
 NUM_CIPHER = len(ciphertexts) #NUM_CIPHER=11
 THRESHOLD_VALUE = 8 
+<<<<<<< HEAD
+=======
+=======
+'25030206463d3d393131555f7f1d061d4052111a19544e2e5d',
+'0f020606150f203f307f5c0a7f24070747130e16545000035d',
+'1203075429152a7020365c167f390f1013170b1006481e1314',
+'0f4610170e1e2235787f7853372c0f065752111b15454e0e09',
+'081543000e1e6f3f3a3348533a270d064a02111a1b5f4e0a18',
+'0909075412132e247436425332281a1c561f04071d520f0b11',
+'4116111b101e2170203011113a69001b475206011552050219',
+'041006064612297020375453342c17545a01451811411a470e',
+'021311114a5b0335207f7c167f22001b44520c15544801125d',
+'06140611460c26243c7f5c167f3d015446010053005907145d',
+'0f05110d160f263f3a7f4210372c03111313090415481d49']
+
+
+NUM_CIPHER = len(ciphertexts) #NUM_CIPHER=11
+THRESHOLD_VALUE = 7 
+>>>>>>> 863da9b728474e24d6d99a5bd479ebf2078e7bb9
+>>>>>>> d24b9685f7073b95f7eb864e3203f42a3bbf20cf
 
 def strxor(a, b):
     if len(a) > len(b):
@@ -55,7 +79,15 @@ def find_space(cipher):
 
 
 def calculate_key(cipher):
+<<<<<<< HEAD
     key = [29] * 200  
+=======
+<<<<<<< HEAD
+    key = [29] * 200  
+=======
+    key = [0] * 200  
+>>>>>>> 863da9b728474e24d6d99a5bd479ebf2078e7bb9
+>>>>>>> d24b9685f7073b95f7eb864e3203f42a3bbf20cf
     space = find_space(cipher)
     
     for cipher_idx_1 in range(NUM_CIPHER):
@@ -71,6 +103,10 @@ def calculate_key(cipher):
 
 result = ""
 key = calculate_key(ciphertexts)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> d24b9685f7073b95f7eb864e3203f42a3bbf20cf
 key_hex =''.join([hex(ord(c)).replace('0x', '')+' ' for c in key])
 print("key=\n"+key)
 print("key_hex=\n"+key_hex)
@@ -88,3 +124,20 @@ for t in range(len(ciphertexts)):
                  result+='0'
     print(result)
     result=''
+<<<<<<< HEAD
+=======
+=======
+key_hex = ''.join([hex(ord(c)).replace('0x', '') for c in key])
+print("key=",key)
+print("key_hex=",key_hex)
+
+f = ''.join([chr(int(d, 16)) for d in [ciphertexts[10][i:i+2] for i in range(0, len(ciphertexts[10]), 2)]])
+for letter in strxor(f,key):
+         if (letter>=' ' and letter<='~ '):
+             result+=letter
+         else:
+             result+='0'
+print(result)
+
+>>>>>>> 863da9b728474e24d6d99a5bd479ebf2078e7bb9
+>>>>>>> d24b9685f7073b95f7eb864e3203f42a3bbf20cf
